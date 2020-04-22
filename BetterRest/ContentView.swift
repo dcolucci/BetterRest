@@ -1,4 +1,4 @@
-//
+//  progress: https://www.hackingwithswift.com/books/ios-swiftui/betterrest-introduction
 //  ContentView.swift
 //  BetterRest
 //
