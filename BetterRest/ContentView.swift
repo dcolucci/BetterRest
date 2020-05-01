@@ -1,4 +1,4 @@
-//  progress: https://www.hackingwithswift.com/books/ios-swiftui/selecting-dates-and-times-with-datepicker
+//  progress: https://www.hackingwithswift.com/books/ios-swiftui/working-with-dates
 //  ContentView.swift
 //  BetterRest
 //
@@ -13,12 +13,28 @@ struct ContentView: View {
     @State private var wakeUp: Date = Date()
 
     var body: some View {
-        VStack {
+        var components = DateComponents()
+        components.hour = 8
+        components.minute = 0
+        let date = Calendar.current.date(from: components) ?? Date()
+
+        let otherComponents = Calendar.current.dateComponents([.hour, .minute], from: date)
+        let hour = otherComponents.hour ?? 0
+        let minute = otherComponents.minute ?? 0
+
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        let dateString = formatter.string(from: Date())
+
+        return VStack {
             Stepper(value: $sleepAmount, in: 4...12, step: 0.25) {
                 Text("\(sleepAmount, specifier: "%g") hours")
             }
             DatePicker("Please enter a time", selection: $wakeUp, in: Date()..., displayedComponents: .date)
                 .labelsHidden()
+            Text("\(date)")
+            Text("\(hour): \(minute)")
+            Text("\(dateString)")
         }
     }
 }
