@@ -1,4 +1,4 @@
-//  progress: https://www.hackingwithswift.com/books/ios-swiftui/entering-numbers-with-stepper
+//  progress: https://www.hackingwithswift.com/books/ios-swiftui/selecting-dates-and-times-with-datepicker
 //  ContentView.swift
 //  BetterRest
 //
@@ -10,10 +10,15 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var sleepAmount: Double = 8.0
+    @State private var wakeUp: Date = Date()
 
     var body: some View {
-        Stepper(value: $sleepAmount, in: 4...12, step: 0.25) {
-            Text("\(sleepAmount, specifier: "%g") hours")
+        VStack {
+            Stepper(value: $sleepAmount, in: 4...12, step: 0.25) {
+                Text("\(sleepAmount, specifier: "%g") hours")
+            }
+            DatePicker("Please enter a time", selection: $wakeUp, in: Date()..., displayedComponents: .date)
+                .labelsHidden()
         }
     }
 }
